@@ -1,4 +1,5 @@
 #include "Array.h"
+#include "StringPermutation.h"
 #include <iostream>
 
 double taylorSeries1(double x, int n)
@@ -61,11 +62,7 @@ int binarySearch(const int* array, int value, int firstIndex, int lastIndex)
 
 int main()
 {
-    int data1[] = {10, 20, 30, 40, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100};
-    int data2[] = {15, 25, 35, 45, 105};
-    Array array1{data1, 15, 15};
-    Array array2{data2, 5, 5};
-    //    int data[] = {10, -20, 30, -40, 50, -55, -60, 65, 70, -75, 80, 85, 90, 95, -100};
-    std::cout << Array::mergeSortedArrays(array1, array2);
+    std::string input = "ABC";
+    stringPermutation2(input,0,2);
     return 0;
 }
