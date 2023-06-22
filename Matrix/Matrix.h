@@ -4,15 +4,21 @@
 #include <iostream>
 
 template <typename T>
+concept IsNumber = std::integral<T> || std::floating_point<T>;
+
+template <typename T>
+concept Numeric = std::is_arithmetic<T>::value;
+
+template <typename T>
 concept MatrixHasGet = requires(T tempMatrix, int i, int j) {
     {
         tempMatrix.get(i, j)
-    } -> std::same_as<int>;
+    } -> IsNumber;
 };
 
 template <typename T, typename P>
 concept MatrixHasSet = requires(T tempMatrix, int i, int j, P value) {
-    requires std::integral<P> || std::floating_point<P>;
+    requires IsNumber<P>;
     tempMatrix.set(i, j, value);
 };
 

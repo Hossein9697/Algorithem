@@ -2,33 +2,36 @@
 
 #include "Matrix.h"
 
+template <typename T>
 class Diagonal
 {
 public:
-    explicit Diagonal(int n);
-    ~Diagonal();
+    explicit Diagonal(int n) : n(n)
+    {
+        array = new T[n];
+    }
+    ~Diagonal()
+    {
+        delete[] array;
+    }
 
-    void set(int i, int j, int value);
-    [[nodiscard]] int get(int i, int j) const;
+    void set(int i, int j, T value)
+    {
+        if (i == j)
+        {
+            array[i] = value;
+        }
+    }
+    [[nodiscard]] T get(int i, int j) const
+    {
+        return (i == j) ? array[i] : 0;
+    }
 
     friend std::ostream& operator<<(std::ostream& out, const Diagonal& matrix);
 
 private:
-    int* array;
+    T* array;
     int n;
 };
 
-inline std::ostream& operator<<(std::ostream& out, const Diagonal& matrix)
-{
-    for (int i = 0; i < matrix.n; ++i)
-    {
-        for (int j = 0; j < matrix.n; ++j)
-        {
-            out << matrix.get(i, j) << "   ";
-        }
-        out << '\n';
-    }
-    return out;
-}
-
-static_assert(MatrixConcept<Diagonal, int>);
+static_assert(MatrixConcept<Diagonal<int>, int>);

@@ -1,23 +1,27 @@
 #include "Diagonal.h"
 
-Diagonal::Diagonal(int n) : n(n), array(new int[n])
+std::ostream& operator<<(std::ostream& out, const Diagonal<int>& matrix)
 {
-}
-
-Diagonal::~Diagonal()
-{
-    delete[] array;
-}
-
-void Diagonal::set(int i, int j, int value)
-{
-    if (i == j)
+    for (int i = 0; i < matrix.n; ++i)
     {
-        array[i] = value;
+        for (int j = 0; j < matrix.n; ++j)
+        {
+            out << matrix.get(i, j) << "   ";
+        }
+        out << '\n';
     }
+    return out;
 }
 
-int Diagonal::get(int i, int j) const
+std::ostream& operator<<(std::ostream& out, const Diagonal<double>& matrix)
 {
-    return (i == j) ? array[i] : 0;
+    for (int i = 0; i < matrix.n; ++i)
+    {
+        for (int j = 0; j < matrix.n; ++j)
+        {
+            out << matrix.get(i, j) << "   ";
+        }
+        out << '\n';
+    }
+    return out;
 }
