@@ -1,23 +1,25 @@
 #pragma once
 
+#include <concepts>
 #include <iostream>
 
-class Matrix
-{
-public:
-    Matrix(int n) : n(n)
+template <typename T>
+concept MatrixHasGet = requires(T tempMatrix, int i, int j) {
     {
-    }
-    virtual ~Matrix()
-    {
-        delete[] array;
-    }
-
-    virtual void set(int i, int j, int value) = 0;
-    virtual int get(int i, int j) = 0;
-    virtual std::ostream& operator<<(std::ostream& out) = 0;
-
-protected:
-    int* array;
-    int n;
+        tempMatrix.get(i, j)
+    } -> std::same_as<int>;
 };
+
+template <typename T, typename P>
+concept MatrixHasSet = requires(T tempMatrix, int i, int j, P value) {
+    requires std::integral<P> || std::floating_point<P>;
+    tempMatrix.set(i, j, value);
+};
+
+template <typename T>
+concept MatrixIsPrintable = requires(T tempMatrix) {
+    std::cout << tempMatrix;
+};
+
+template <typename T, typename P>
+concept MatrixConcept = MatrixHasGet<T> && MatrixHasSet<T, P> && MatrixIsPrintable<T>;

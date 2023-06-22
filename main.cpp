@@ -18,7 +18,7 @@ int main()
             matrix.set(i, j, input);
         }
     }
-    matrix.operator<<(std::cout);
+    std::cout << matrix;
 
     return 0;
 }
