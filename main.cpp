@@ -1,24 +1,23 @@
-#include "Matrix/Diagonal.h"
+#include "Matrix/Sparse.h"
 #include <iostream>
 
 int main()
 {
-    std::cout << "Enter N:\t";
-    int n;
-    std::cin >> n;
-    Diagonal<double> matrix(n);
-    std::cout << "Enter Numbers:\n";
+    int n = 4, m = 4, size = 4;
+    std::cout << "Enter N x M: ";
 
-    for (int i = 0; i < n; ++i)
-    {
-        for (int j = 0; j <n; ++j)
-        {
-            double input;
-            std::cin >> input;
-            matrix.set(i, j, input);
-        }
-    }
-    std::cout << matrix;
+    std::cin >> n >> m;
+
+    std::cout << "Enter total numbers1: ";
+    std::cin >> size;
+    Sparse sparse1(n, m, size);
+    std::cout << "Enter total numbers2: ";
+    std::cin >> size;
+    Sparse sparse2(n, m, size);
+    std::cin >> sparse1 >> sparse2;
+    //    std::cout << sparse1;
+    //    std::cout << sparse2;
+    std::cout << sparse1 + sparse2;
 
     return 0;
 }
