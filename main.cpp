@@ -1,23 +1,16 @@
-#include "Matrix/Sparse.h"
+#include "Matrix/Polynomial.h"
 #include <iostream>
 
 int main()
 {
-    int n = 4, m = 4, size = 4;
-    std::cout << "Enter N x M: ";
+    Polynomial polynomial1(4);
+    Polynomial polynomial2(2);
+    std::cin >> polynomial1 >> polynomial2;
+    std::cout << polynomial1 << polynomial1.value(2) << '\n';
+    std::cout << polynomial2 << polynomial2.value(2) << '\n';
 
-    std::cin >> n >> m;
-
-    std::cout << "Enter total numbers1: ";
-    std::cin >> size;
-    Sparse sparse1(n, m, size);
-    std::cout << "Enter total numbers2: ";
-    std::cin >> size;
-    Sparse sparse2(n, m, size);
-    std::cin >> sparse1 >> sparse2;
-    //    std::cout << sparse1;
-    //    std::cout << sparse2;
-    std::cout << sparse1 + sparse2;
+    auto polynomial3 = polynomial1 + polynomial2;
+    std::cout << polynomial3 << polynomial3.value(2) << '\n';
 
     return 0;
 }
